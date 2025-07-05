@@ -133,7 +133,7 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(len(products), 1)
         self.assertEqual(products[0].id, original_id)
         self.assertEqual(products[0].description, "New Description")
-        
+
     def test_delete_a_product(self):
         """It should Delete a product from the database"""
         product = ProductFactory()
@@ -149,7 +149,7 @@ class TestProductModel(unittest.TestCase):
         """It should list all products in the database"""
         products = Product.all()
         self.assertEqual(len(products), 0)
-        for i in range(5):
+        for _ in range(5):
             product = ProductFactory()
             product.create()
         self.assertEqual(len(Product.all()), 5)
@@ -158,7 +158,7 @@ class TestProductModel(unittest.TestCase):
         """It should Find a product by name"""
         products = Product.all()
         self.assertEqual(len(products), 0)
-        for i in range(5):
+        for _ in range(5):
             product = ProductFactory()
             product.create()
         products = Product.all()
@@ -177,15 +177,15 @@ class TestProductModel(unittest.TestCase):
             product.create()
         available = products[0].available
         count = len([product for product in products if product.available == available])
-        found = Product.find_by_availability()
+        found = Product.find_by_availability(available)
         self.assertEqual(found.count(), count)
         for product in found:
             self.assertEqual(product.available, available)
 
     def test_find_product_by_category(self):
         """It should Find a product by Category"""
-        for i in range(10):
-            product = ProductFactory()
+        products = ProductFactory.create_batch(10)
+        for product in products:
             product.create()
         products = Product.all()
         category = products[0].category

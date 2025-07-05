@@ -51,11 +51,11 @@ class ProductFactory(factory.Factory):
     available = FuzzyChoice(choices=[True, False])
     category = FuzzyChoice(
         choices=[
-            "UNKNOWN",
-            "CLOTHS",
-            "FOOD",
-            "HOUSEWARES",
-            "AUTOMOTIVE",
-            "TOOLS"
+            Category.UNKNOWN,
+            Category.CLOTHS,
+            Category.FOOD,
+            Category.HOUSEWARES,
+            Category.AUTOMOTIVE,
+            Category.TOOLS,
         ]
-    )   
+    )
